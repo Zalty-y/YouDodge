@@ -1,0 +1,21 @@
+{
+    "name" : "YouDodge",
+    "version" : "0.1.0",
+    "description" : "TODO",
+    "permissions" : ["tabs", "scripting", "webRequest"],
+    "host_permissions" : ["*://*.youtube.com/*"],
+    "background" : {
+        "service_worker" : "background.js"
+    },
+    "content_scripts" : [
+        {
+            "matches" : ["*://*.youtube.com/watch*"],
+            "js" : ["contentScript.js"]
+        }
+    ],
+    "action" : {
+        "default_title" : "YouDodge",
+        "default_popup" : "popup.html"
+    },
+    "manifest_version" : 3
+}
