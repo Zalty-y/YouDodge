@@ -1,17 +1,17 @@
-chrome.webRequest.onBeforeSendHeaders.addListener(
-    (details) => {
-    //     const headers = details.requestHeaders;
-    //     headers.forEach((header) => {
-    //         if (header.name === "po_token") {
-    //         console.log("Found po_token:", header.value);
-    //         }
-    //     });
-    //     return { requestHeaders: headers };
-    console.log(details);
-    },
-    { urls: ["*://*.youtube.com/*"] },
-    ["requestHeaders"]
-);
+// chrome.webRequest.onBeforeSendHeaders.addListener(
+//     (details) => {
+//     //     const headers = details.requestHeaders;
+//     //     headers.forEach((header) => {
+//     //         if (header.name === "po_token") {
+//     //         console.log("Found po_token:", header.value);
+//     //         }
+//     //     });
+//     //     return { requestHeaders: headers };
+//     console.log(details);
+//     },
+//     { urls: ["*://*.youtube.com/*"] },
+//     ["requestHeaders"]
+// );
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete' && tab.url && tab.url.includes("youtube.com/watch")) {

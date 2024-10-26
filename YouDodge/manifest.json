@@ -2,7 +2,7 @@
     "name" : "YouDodge",
     "version" : "0.1.0",
     "description" : "TODO",
-    "permissions" : ["tabs", "scripting", "webRequest"],
+    "permissions" : ["tabs", "scripting"],
     "host_permissions" : ["*://*.youtube.com/*"],
     "background" : {
         "service_worker" : "background.js"
