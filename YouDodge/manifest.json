@@ -2,10 +2,17 @@
     "name" : "YouDodge",
     "version" : "0.1.0",
     "description" : "TODO",
-    "permissions" : ["tabs", "scripting"],
+    "permissions" : ["tabs", "scripting", "declarativeNetRequest"],
     "host_permissions" : ["*://*.youtube.com/*"],
     "background" : {
         "service_worker" : "background.js"
+    },
+    "declarative_net_request": {
+      "rule_resources": [{
+        "id": "block-youtube-videos",
+        "enabled": true,
+        "path": "rules.json"
+      }]
     },
     "content_scripts" : [
         {

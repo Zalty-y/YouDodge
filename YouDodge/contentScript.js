@@ -1,6 +1,7 @@
 (() => {
     let youtubeLeftControls, youtubePlayer;
     let currentVideoId = "";
+    const salt = "?can=cel";
 
     chrome.runtime.onMessage.addListener(async (obj, sender, response) => {
         const { type, value, videoId } = obj;
@@ -13,22 +14,25 @@
     });
 
     const replaceVideo = async () => {
-        const data = getVideoData();
-        console.log(data);
+        const data = await getVideoData();
+
+        console.log("Playability status: " + data.playabilityStatus.status);
 
         // TODO
         const youtubePlayer = document.querySelector('.html5-video-player video');
+        // const youtubePlayer = document.getElementsByClassName('video-stream html5-main-video');
         if (youtubePlayer) {
-
+            youtubePlayer.parentElement.remove();
+            // youtubePlayer.src = '';
+            // youtubePlayer.removeAttribute('src');
         }
         else {
             console.log('YouTube player not found.')
         }
     }
 
-    const getVideoData = async () => {
-        // This API key is not a secret.
-        const response = await fetch('https://www.youtube.com/youtubei/v1/player?key=AIzaSyA8eiZmM1FaDVjRy-df2KTyQ_vz_yYM39w', {
+    const getVideoData = () => {
+        const data = fetch('https://www.youtube.com/youtubei/v1/player?key=AIzaSyA8eiZmM1FaDVjRy-df2KTyQ_vz_yYM39w', {
             method: 'POST',
             headers: {
                 "User-Agent": "com.google.ios.youtube/19.29.1 (iPhone16,2; U; CPU iOS 17_5_1 like Mac OS X)"
@@ -52,7 +56,11 @@
                     }
                 }
             }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            return data;
         });
-        return await response.json();
+        return data;
     }
 })();
